@@ -1,6 +1,6 @@
 import requests
 import json
-
+import pprint
 
 refreshToken = '1//0fIjlc_bhGmfaCgYIARAAGA8SNwF-L9Ir5JqyHsnHQyAhtOPYFWIo8rkoPQLK3EayXuj8VZOtpfo4GFnqAvSo-FnW5fwjRwgtadg'
 
@@ -10,6 +10,10 @@ refreshTokenResource = requests.post(f"""https://www.googleapis.com/oauth2/v4/to
 access_token_responce = refreshTokenResource.json()
 access_token = access_token_responce['access_token']
 
-print(access_token)
+def setCoolto75():
+    tempResourceURL = 'https://smartdevicemanagement.googleapis.com/v1/enterprises/ca897a23-d921-4f36-b195-25a54b963851/devices/AVPHwEt6uhfH1cfKdW39jJSxLHZknGOZBOA47FmQZ-I8En7koK_RiSbBaVAe79Bg5kU5NzBsqvxrxu7ProObqx1dy-Ie2w:executeCommand'
+    headers = {'Content-Type':'application/json', 'Authorization':f'Bearer {access_token}'}
+    requestBody = {'command':'sdm.devices.commands.ThermostatTemperatureSetpoint.SetCool', 'params':{'coolCelsius': 23.89}}
+    setCoolTemp = requests.post(url=tempResourceURL, headers=headers, json=requestBody)
 
-tempResource = requests.post('https://smartdevicemanagement.googleapis.com/v1/enterprises/ca897a23-d921-4f36-b195-25a54b963851/devices/AVPHwEt6uhfH1cfKdW39jJSxLHZknGOZBOA47FmQZ-I8En7koK_RiSbBaVAe79Bg5kU5NzBsqvxrxu7ProObqx1dy-Ie2w:executeCommand')
+setCoolto75()
